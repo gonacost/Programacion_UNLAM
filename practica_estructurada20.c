@@ -13,6 +13,7 @@ c. Leer los datos del archivo, mediante la Función LECTURA.
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef struct
 {
@@ -49,6 +50,8 @@ int main()
     {
         alumno.dni = dni;
 
+        while(getchar() != '\n');
+
         printf("Ingrese el NOMBRE y APELLIDO del alumno: \n");
         fgets(alumno.nombre_apellido, 81, stdin);
 
@@ -64,6 +67,8 @@ int main()
 
         promedio = (float)suma / 2;
 
+        alumno.promedio = promedio;
+
         fwrite(&alumno, sizeof(sALUMNOS), 1, fp);
 
         printf("Ingrese el DNI del alumno. (0 para fin): \n");
@@ -77,6 +82,8 @@ int main()
     if (fp == NULL)
     {
         printf("ERROR al abrir el archivo: \n");
+        getch();
+        exit(1);
     }
 
     lectura(fp);
